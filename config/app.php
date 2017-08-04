@@ -136,6 +136,8 @@ return [
     */
 
     'providers' => [
+        // Bringing whoops back to life
+        GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...
