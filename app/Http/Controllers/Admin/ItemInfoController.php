@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\ItemInfoController as Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemInfo as Request;
 use App\ItemInfo;
+use App\ItemType;
 
 class ItemInfoController extends Controller
 {
@@ -16,7 +17,7 @@ class ItemInfoController extends Controller
      */
     public function index()
     {
-        return parent::index();
+        return view('admin.item_infos.index', ['itemInfos' => ItemInfo::paginate(20)]);
     }
 
     /**
@@ -26,7 +27,7 @@ class ItemInfoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.item_infos.create', ['itemTypes' => ItemType::all()]);
     }
 
     /**
@@ -37,7 +38,12 @@ class ItemInfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $itemInfo = new ItemInfo();
+        $itemInfo->save($request->all());
+
+        $request->session()->flash('success', '"'.$itemInfo->title.'" created!');
+
+        return redirect()->route('admin.item-infos.index');
     }
 
     /**
@@ -46,10 +52,9 @@ class ItemInfoController extends Controller
      * @param  ItemInfo $itemInfo
      * @return \Illuminate\Http\Response
      */
-    public function show($itemInfo)
+    public function show(ItemInfo $itemInfo)
     {
-        //
-        return parent::show($itemInfo);
+        return view('admin.item_infos.show', ['itemInfo' => $itemInfo]);
     }
 
     /**
@@ -58,9 +63,9 @@ class ItemInfoController extends Controller
      * @param  ItemInfo $itemInfo
      * @return \Illuminate\Http\Response
      */
-    public function edit($itemInfo)
+    public function edit(ItemInfo $itemInfo)
     {
-        //
+        return view('admin.item_infos.edit', ['itemInfo' => $itemInfo, 'itemTypes' => ItemType::all()]);
     }
 
     /**
@@ -72,7 +77,11 @@ class ItemInfoController extends Controller
      */
     public function update(Request $request, ItemInfo $itemInfo)
     {
-        //
+        $itemInfo->update($request->all());
+        $request->session()->flash("success",'"'.$itemInfo->title.'" updated!');
+
+        return redirect()->route('admin.item-infos.index');
+
     }
 
     /**
@@ -81,8 +90,11 @@ class ItemInfoController extends Controller
      * @param  ItemInfo $itemInfo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($itemInfo)
+    public function destroy(ItemInfo $itemInfo)
     {
-        //
+        $itemInfo->delete();
+        \request()->session()->flash('success', '"'.$itemInfo->title.'" deleted!');
+
+        return redirect()->route('admin.item-infos.index');
     }
 }

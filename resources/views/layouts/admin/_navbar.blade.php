@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'BDJeux') }} | Admin Area</title>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-<div id="app">
+@section('navbar')
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -42,6 +26,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{url('/admin/items')}}">Items</a></li>
+                            <li><a href="{{url('/admin/item-infos')}}">Items Info</a></li>
                             <li><a href="{{url('/admin/item-states')}}">Item States</a></li>
                             <li><a href="{{url('/admin/item-types')}}">Item Types</a></li>
                         </ul>
@@ -78,11 +63,4 @@
             </div>
         </div>
     </nav>
-
-    @yield('content')
-</div>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-</body>
-</html>
+@endsection

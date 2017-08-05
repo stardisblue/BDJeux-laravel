@@ -13,7 +13,7 @@ class ItemInfoController extends Controller
      */
     public function index()
     {
-        return view('admin.item_infos.index', ['itemInfos' => ItemInfo::all()]);
+        return view('item_infos.index', ['itemInfos' => ItemInfo::paginate(20)]);
     }
 
     /**
@@ -22,8 +22,8 @@ class ItemInfoController extends Controller
      * @param  ItemInfo $itemInfo
      * @return \Illuminate\Http\Response
      */
-    public function show($itemInfo)
+    public function show(ItemInfo $itemInfo)
     {
-        //
+        return view('item_infos.show', ['itemInfo' => $itemInfo]);
     }
 }

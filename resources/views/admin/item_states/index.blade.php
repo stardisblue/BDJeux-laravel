@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.admin.app')
 
 @section('content')
     <div class="container">
@@ -12,14 +12,23 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <td>id</td>
-                                    <td>name</td>
+                                    <th>id</th>
+                                    <th>name</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 @foreach($itemStates as $itemState)
                                     <tr>
                                         <td>{{$itemState->id}}</td>
                                         <td>{{$itemState->name}}</td>
+                                        <td>
+                                            @include('snippet.action-buttons', [
+                                            'view' => action('Admin\ItemStateController@show', $itemState),
+                                            'edit' => action('Admin\ItemStateController@edit', $itemState),
+                                            'remove' => action('Admin\ItemStateController@destroy', $itemState),
+                                            'id' => $itemState->id
+                                            ])
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>

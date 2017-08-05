@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\ItemState;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ItemStateController extends Controller
 {
@@ -81,6 +82,6 @@ class ItemStateController extends Controller
      */
     public function destroy(ItemState $itemState)
     {
-        //
+        return new Response('gg');
     }
 }

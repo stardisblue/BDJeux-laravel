@@ -10,34 +10,14 @@
                         <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                <label for="username" class="col-md-4 control-label">Username</label>
+                            @component('snippet.form-group',['label' => 'Username', 'name'=>'username'])
+                                <input id="username" class="form-control" name="username"
+                                       value="{{ old('username') }}" required autofocus>
+                            @endcomponent
 
-                                <div class="col-md-6">
-                                    <input id="username" class="form-control" name="username"
-                                           value="{{ old('username') }}" required autofocus>
-
-                                    @if ($errors->has('username'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            @component('snippet.form-group',['label' => 'Password', 'name'=>'password'])
+                                <input id="password" type="password" class="form-control" name="password" required>
+                            @endcomponent
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">

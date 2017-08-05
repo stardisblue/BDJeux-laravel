@@ -28,7 +28,7 @@ class ItemInfo extends FormRequest
             'item_type_id' => 'required|integer|exists:item_types,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'isbn' => 'nullable|alphanumeric|max:13',
+            'isbn' => 'nullable|alpha_num|max:13',
             'price' => 'nullable|numeric|min:0',
             'author' => 'required|string|max:255',
             'nsfw' => 'boolean',
