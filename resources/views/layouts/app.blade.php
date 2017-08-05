@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'DBJeux') }}</title>
+    <title>{{ config('app.name', 'BDJeux') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -47,7 +47,10 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
+
+
                         <li class="dropdown">
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
@@ -68,6 +71,9 @@
                                 </li>
                             </ul>
                         </li>
+                        @if(Auth::user()->isAdmin())
+                            <li><a href="{{route('admin')}}">Admin Area</a></li>
+                        @endif
                     @endif
                 </ul>
             </div>

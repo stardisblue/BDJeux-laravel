@@ -24,13 +24,13 @@ class CreateItemsTable extends Migration
             $table->integer('item_type_id');
             $table->string('title');
             $table->string('description');
-            $table->char('isbn', 13);
-            $table->integer('price');
+            $table->char('isbn', 13)->nullable();
+            $table->integer('price')->nullable();
             $table->string('author');
             $table->timestamps();
 
             $table->foreign('item_type_id')->references('id')->on('item_types');
-            $table->boolean('nsfw')->nullable()->default('FALSE');
+            $table->boolean('nsfw')->default('FALSE');
         });
 
         Schema::create('item_states', function (Blueprint $table) {

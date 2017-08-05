@@ -18,9 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', "ProfileController")->name('profile');
+Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function () {
+    Route::get('/', 'ProfileController@show')->name('profile');
+});
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/', function () {
-        return 'hello';
-    });
+        return view('admin.app');
+    })->name('admin');
+
+    Route::resource('/items', 'ItemController');
+    Route::resource('/item-infos', 'ItemInfoController');
+    Route::resource('/item-states', 'ItemStateController');
+    Route::resource('/item-types', 'ItemTypeController');
 });
