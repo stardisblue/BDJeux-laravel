@@ -43,7 +43,7 @@ class CreateItemsTable extends Migration
             $table->integer('item_info_id');
             $table->integer('item_state_id');
             $table->integer('user_id');
-            $table->boolean('allow_borrow')->default('FALSE');
+            $table->boolean('borrowable')->default('FALSE');
             $table->timestamps();
 
             $table->foreign('item_info_id')->references('id')->on('item_infos');

@@ -8,9 +8,10 @@
                     <div class="panel-heading">Item</div>
 
                     <div class="panel-body">
-                        {{ $item->allow_borrow }}
+                        {{ $item->borrowable }}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection

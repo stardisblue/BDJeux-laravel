@@ -28,7 +28,7 @@ class Item extends FormRequest
             'item_info_id' => 'required|integer|exists:item_infos,id',
             'item_state_id' => 'required|integer|exists:item_states,id',
             'user_id' => 'required|integer|exists:users,id',
-            'allow_borrow' => 'nullable|boolean',
+            'borrowable' => 'nullable|boolean',
         ];
     }
 }

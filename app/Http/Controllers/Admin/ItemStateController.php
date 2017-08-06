@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\ItemState;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ItemStateController extends Controller
 {
@@ -26,7 +25,7 @@ class ItemStateController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.item_states.create');
     }
 
     /**
@@ -37,7 +36,19 @@ class ItemStateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:item_states|max:20',
+        ]);
+
+        $itemState = new ItemState();
+
+        $itemState->name = $request->name;
+
+        $itemState->save();
+
+        $request->session()->flash('success', 'Item state "'.$itemState->name.'" saved !');
+
+        return redirect()->route('admin.item-states.index');
     }
 
     /**
@@ -48,7 +59,7 @@ class ItemStateController extends Controller
      */
     public function show(ItemState $itemState)
     {
-        //
+        return view('admin.item_states.show', ['itemState' => $itemState]);
     }
 
     /**
@@ -59,7 +70,7 @@ class ItemStateController extends Controller
      */
     public function edit(ItemState $itemState)
     {
-        //
+        return view('admin.item_states.edit', ['itemState' => $itemState]);
     }
 
     /**
@@ -71,7 +82,17 @@ class ItemStateController extends Controller
      */
     public function update(Request $request, ItemState $itemState)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:item_states|max:20',
+        ]);
+
+        $itemState->name = $request->name;
+
+        $itemState->update();
+
+        $request->session()->flash('success', '"'.$itemState->name.'" updated !');
+
+        return redirect()->route('admin.item-states.index');
     }
 
     /**
@@ -82,6 +103,10 @@ class ItemStateController extends Controller
      */
     public function destroy(ItemState $itemState)
     {
-        return new Response('gg');
+        $itemState->delete();
+
+        \request()->session()->flash('success', '"'.$itemState->name.'" updated !');
+
+        return redirect()->route('admin.item-states.index');
     }
 }

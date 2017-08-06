@@ -44,7 +44,8 @@
                             @endcomponent
 
                             @component('snippet.form-group',['label'=> 'Price', 'name' => 'price'])
-                                <input type="number" name="price" id="price" class="form-control"
+                                <input type="number" min="0.00" step="0.01" name="price" id="price"
+                                       class="form-control"
                                        value="{{$itemInfo->price or old('price') }}">
                             @endcomponent
 
@@ -63,7 +64,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Register
+                                        Update
                                     </button>
                                 </div>
                             </div>
