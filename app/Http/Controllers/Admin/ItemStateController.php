@@ -15,7 +15,7 @@ class ItemStateController extends Controller
      */
     public function index()
     {
-        return view('admin.item_states.index', ['itemStates' => ItemState::all()]);
+        return view('admin.item-states.index', ['itemStates' => ItemState::all()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class ItemStateController extends Controller
      */
     public function create()
     {
-        return view('admin.item_states.create');
+        return view('admin.item-states.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class ItemStateController extends Controller
 
         $itemState->save();
 
-        $request->session()->flash('success', 'Item state "'.$itemState->name.'" saved !');
+        $request->session()->flash('success', 'Item state "'.$itemState->name.'" created !');
 
         return redirect()->route('admin.item-states.index');
     }
@@ -59,7 +59,8 @@ class ItemStateController extends Controller
      */
     public function show(ItemState $itemState)
     {
-        return view('admin.item_states.show', ['itemState' => $itemState]);
+        return view('admin.item-states.show',
+            ['itemState' => $itemState]);
     }
 
     /**
@@ -70,7 +71,7 @@ class ItemStateController extends Controller
      */
     public function edit(ItemState $itemState)
     {
-        return view('admin.item_states.edit', ['itemState' => $itemState]);
+        return view('admin.item-states.edit', ['itemState' => $itemState]);
     }
 
     /**
@@ -105,7 +106,7 @@ class ItemStateController extends Controller
     {
         $itemState->delete();
 
-        \request()->session()->flash('success', '"'.$itemState->name.'" updated !');
+        \request()->session()->flash('success', '"'.$itemState->name.'" deleted !');
 
         return redirect()->route('admin.item-states.index');
     }

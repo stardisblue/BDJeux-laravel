@@ -10,6 +10,11 @@ class ItemState extends Model
 
     protected $fillable = ['name'];
 
+    public function itemsPaginate($perPage = 20)
+    {
+        return $this->items()->paginate($perPage);
+    }
+
     public function items()
     {
         return $this->hasMany('App\Item');

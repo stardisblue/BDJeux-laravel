@@ -23,4 +23,14 @@ class ItemInfo extends Model
     {
         return $this->belongsTo('App\itemType');
     }
+
+    public function itemsPaginate($perPage = 20)
+    {
+        return $this->items()->paginate($perPage);
+    }
+
+    public function items()
+    {
+        return $this->hasMany('App\Item');
+    }
 }

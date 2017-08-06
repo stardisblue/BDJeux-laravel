@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\ItemController as Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Item as Request;
 use App\Item;
+use App\ItemInfo;
+use App\ItemState;
+use App\User;
 
 class ItemController extends Controller
 {
@@ -15,7 +18,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return parent::index();
+        return view('admin.items.index', ['items' => Item::paginate(20)]);
     }
 
     /**
@@ -25,7 +28,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.items.create',
+            ['itemInfos' => ItemInfo::all(), 'users' => User::all(), 'itemStates' => ItemState::all()]);
     }
 
     /**
@@ -36,7 +40,14 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item($request->all());
+
+        $item->save();
+
+        $request->session()->flash('success',
+            'Item '.$item->itemInfo->title.', <i>'.$item->user->username.'</i> created !');
+
+        return redirect()->route('admin.items.index');
     }
 
     /**
@@ -47,7 +58,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return view('admin.items.show', ['item' => $item]);
     }
 
     /**
@@ -58,7 +69,12 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view('admin.items.edit', [
+            'item' => $item,
+            'itemInfos' => ItemInfo::all(),
+            'users' => User::all(),
+            'itemStates' => ItemState::all(),
+        ]);
     }
 
     /**
@@ -70,7 +86,12 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $item->update($request->all());
+
+        $request->session()->flash('success',
+            'Item : '.$item->itemInfo->title.', <i>'.$item->user->username.'</i> updated !');
+
+        return redirect()->route('admin.items.show', $item);
     }
 
     /**
@@ -81,6 +102,11 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+
+        \request()->session()->flash('success',
+            'Item : '.$item->itemInfo->title.', <i>'.$item->user->username.'</i> deleted !');
+
+        return redirect()->route('admin.items.index');
     }
 }

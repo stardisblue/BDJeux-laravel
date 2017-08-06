@@ -37,4 +37,40 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    public function ownPaginate($perPage = 20)
+    {
+        return $this->items()->paginate($this->perPage);
+    }
+
+    public function own()
+    {
+        return $this->hasMany('App\Items');
+    }
+
+    public function borrowing()
+    {
+
+    }
+
+    public function borrowed()
+    {
+
+    }
+
+    public function late()
+    {
+
+    }
+
+    public function lost()
+    {
+
+    }
+
+    public function getByStatus(Status $status)
+    {
+
+    }
+
 }

@@ -25,6 +25,7 @@ class CreateLinkItemsUsers extends Migration
             $table->integer('status_id');
             $table->dateTime('date_begin');
             $table->dateTime('date_end');
+            $table->dateTime('date_given_back')->nullable();
 
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

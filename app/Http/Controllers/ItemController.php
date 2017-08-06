@@ -15,7 +15,7 @@ class ItemController extends Controller
     public function index()
     {
         //
-        return view('admin.items.index', ['items' => Item::all()]);
+        return view('items.index', ['items' => Item::paginate(20)]);
     }
 
     /**
@@ -26,6 +26,6 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return view('admin.items.index', $item);
+        return view('items.show', ['item' => $item]);
     }
 }

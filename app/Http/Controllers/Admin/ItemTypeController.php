@@ -15,7 +15,7 @@ class ItemTypeController extends Controller
      */
     public function index()
     {
-        return view('admin.item_types.index', ['itemTypes' => ItemType::all()]);
+        return view('admin.item-types.index', ['itemTypes' => ItemType::all()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class ItemTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.item-types.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class ItemTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:item_states|max:20',
+        ]);
+
+        $itemType = new ItemType();
+
+        $itemType->name = $request->name;
+
+        $itemType->save();
+
+        $request->session()->flash('success', 'Item state "'.$itemType->name.'" created !');
+
+        return redirect()->route('admin.item-states.index');
     }
 
     /**
@@ -47,7 +59,8 @@ class ItemTypeController extends Controller
      */
     public function show(ItemType $itemType)
     {
-        //
+        return view('admin.item-types.show',
+            ['itemType' => $itemType]);
     }
 
     /**
@@ -58,7 +71,7 @@ class ItemTypeController extends Controller
      */
     public function edit(ItemType $itemType)
     {
-        //
+        return view('admin.item-types.edit', ['itemType' => $itemType]);
     }
 
     /**
@@ -70,7 +83,17 @@ class ItemTypeController extends Controller
      */
     public function update(Request $request, ItemType $itemType)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:item_states|max:20',
+        ]);
+
+        $itemType->name = $request->name;
+
+        $itemType->update();
+
+        $request->session()->flash('success', '"'.$itemType->name.'" updated !');
+
+        return redirect()->route('admin.item-types.index');
     }
 
     /**
@@ -81,6 +104,10 @@ class ItemTypeController extends Controller
      */
     public function destroy(ItemType $itemType)
     {
-        //
+        $itemType->delete();
+
+        \request()->session()->flash('success', '"'.$itemType->name.'" deleted !');
+
+        return redirect()->route('admin.item-types.index');
     }
 }

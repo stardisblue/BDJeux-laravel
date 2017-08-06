@@ -5,8 +5,10 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="text-left">Items States</div>
-                    <div class="text-right"><a href="{{route('admin.item-states.create')}}">Create new</a></div>
+                    <h2 class="panel-title">Items Types</h2>
+                    <div class="text-right">
+                        <a href="{{route('admin.item-types.create')}}">Create new</a>
+                    </div>
                 </div>
 
                 <div class="panel-body">
@@ -16,19 +18,21 @@
                             <tr>
                                 <th>id</th>
                                 <th>name</th>
+                                <th>n° Item-infos</th>
                                 <th></th>
                             </tr>
                             </thead>
-                            @foreach($itemStates as $itemState)
+                            @foreach($itemTypes as $itemType)
                                 <tr>
-                                    <td>{{$itemState->id}}</td>
-                                    <td>{{$itemState->name}}</td>
+                                    <td>{{$itemType->id}}</td>
+                                    <td>{{$itemType->name}}</td>
+                                    <td>{{$itemType->itemInfos()->count()}}</td>
                                     <td>
                                         @include('snippet.action-buttons', [
-                                        'view' => action('Admin\ItemStateController@show', $itemState),
-                                        'edit' => action('Admin\ItemStateController@edit', $itemState),
-                                        'remove' => action('Admin\ItemStateController@destroy', $itemState),
-                                        'id' => $itemState->id
+                                            'view' => action('Admin\ItemTypeController@show', $itemType),
+                                            'edit' => action('Admin\ItemTypeController@edit', $itemType),
+                                            'remove' => action('Admin\ItemTypeController@destroy', $itemType),
+                                            'id' => $itemType->id
                                         ])
                                     </td>
                                 </tr>
