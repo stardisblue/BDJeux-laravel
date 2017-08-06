@@ -10,5 +10,9 @@
         'id'=>$item->id
     ])
 
-    @include('items.single')
+    {{ $item->itemInfo->title }}
+    {{ $item->itemInfo->description }}
+    {{ $item->itemState->name }}
+    {{ $item->user->username }}
+    {{ $item->borrowable }}
 @endsection

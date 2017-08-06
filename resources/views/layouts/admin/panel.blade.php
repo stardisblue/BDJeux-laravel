@@ -7,7 +7,6 @@
                 <div class="panel-heading">
                     @yield('heading')
                 </div>
-
                 <div class="panel-body">
                     @yield('body')
                 </div>

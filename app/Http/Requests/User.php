@@ -30,7 +30,6 @@ class User extends FormRequest
             'lastname' => 'required|string|max:64',
             'username' => 'required|string|max:64|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
         ];
     }
 }

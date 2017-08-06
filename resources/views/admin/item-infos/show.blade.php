@@ -13,11 +13,7 @@
         'id'=>$itemInfo->id
     ])
 
-    {{ $itemInfo->description }}
-    {{ $itemInfo->isbn }}
-    {{ $itemInfo->price }}
-    {{ $itemInfo->author }}
-    {{ $itemInfo->nsfw ? 'yes' : 'no' }}
+    @include('item-infos.single')
 
     @if($itemInfo->items()->count() > 0)
         <h2>Related Items</h2>

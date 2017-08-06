@@ -19,7 +19,10 @@
                 <td>{{$item->borrowable ? 'yes': 'no'}}</td>
                 <td>
                     @include('snippet.action-buttons',[
-                        'view'=> route('items.show', $item),
+                        'view'=> route('admin.items.show', $item),
+                        'edit'=> route('admin.items.edit', $item),
+                        'remove'=> route('admin.items.destroy', $item),
+                        'id'=>$item->id
                     ])
                 </td>
             </tr>

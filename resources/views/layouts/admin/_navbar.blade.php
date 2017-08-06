@@ -25,8 +25,8 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{url('/admin/items')}}">List</a></li>
-                            <li><a href="{{url('/admin/item-states')}}">Item States</a></li>
+                            <li><a href="{{route('admin.items.index')}}">Item List</a></li>
+                            <li><a href="{{route('admin.item-states.index')}}">Item States</a></li>
                             <li class="divider"></li>
                             <li class="dropdown-header">Item States</li>
                             @foreach($navbarItemStates as $itemState)
@@ -45,8 +45,9 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{url('/admin/item-infos')}}">List</a></li>
-                            <li role="separator" class="divider"></li>
+                            <li><a href="{{route('admin.item-infos.index')}}">Item Infos List</a></li>
+                            <li><a href="{{route('admin.item-types.index')}}">Item Types List</a></li>
+                            <li class="divider"></li>
                             <li class="dropdown-header">Item Types</li>
                             @foreach($navbarItemTypes as $itemType)
                                 <li>
@@ -56,8 +57,6 @@
                                     </a>
                                 </li>
                             @endforeach
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{url('/admin/item-types')}}">List</a></li>
                         </ul>
                     </li>
                 </ul>

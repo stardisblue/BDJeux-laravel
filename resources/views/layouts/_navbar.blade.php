@@ -13,15 +13,53 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'DBJeux') }}
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Items <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('items.index')}}">Item List</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Item States</li>
+                            @foreach($navbarItemStates as $itemState)
+                                <li>
+                                    <a href="{{route('item-states.show',$itemState)}}" class="text-capitalize">
+                                        {{$itemState->name}}
+                                        <span class="badge">{{$itemState->items()->count()}}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Item Infos <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('item-infos.index')}}">Item Infos List</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Item Types</li>
+                            @foreach($navbarItemTypes as $itemType)
+                                <li>
+                                    <a href="{{route('item-types.show',$itemType)}}" class="text-capitalize">
+                                        {{$itemType->name}}
+                                        <span class="badge">{{$itemType->itemInfos()->count()}}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

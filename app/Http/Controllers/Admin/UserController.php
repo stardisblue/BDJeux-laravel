@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.users.index', User::paginate(20));
     }
 
     /**
@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -36,7 +36,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User($request->all());
+
+        $user->save();
+
+        $request->session()->flash('success', $user->username.' created !');
+
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -47,7 +53,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -58,7 +64,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     /**
@@ -70,7 +76,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->card_id = $request->card_id;
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->update();
+
+        $request->session()->flash('success', $user->username.' updated !');
+
+        return redirect()->route('admin.users.show', $user);
     }
 
     /**
@@ -81,6 +96,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        $request->session()->flash('success', $user->username.'deleted !');
+
+        return redirect()->route('admin.users.index');
     }
 }
