@@ -1,27 +1,20 @@
-@extends('layouts.admin.app')
+@extends('layouts.admin.panel')
 
-@section('content')
-    {{-- TODO Design --}}
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h2 class="panel-title">{{$itemType->name}}</h2></div>
+@section('heading')
+    <h2 class="panel-title text-capitalize">{{$itemType->name}}</h2>
+@endsection
+@section('body')
 
-                <div class="panel-body">
-                    @include('snippet.action-buttons',[
-                        'edit'=> route('admin.item-types.edit', $itemType),
-                        'remove'=> route('admin.item-types.destroy', $itemType),
-                        'id'=>$itemType->id
-                    ])
+    @include('snippet.action-buttons',[
+        'edit'=> route('admin.item-types.edit', $itemType),
+        'remove'=> route('admin.item-types.destroy', $itemType),
+        'id'=>$itemType->id
+    ])
 
-                    <h3>Related Items</h3>
-                    @if($itemType->itemInfos()->count() > 0)
-                        @include('admin.item-infos.table',['itemInfos'=>$itemType->itemInfosPaginate()])
-                    @else
-                        <p>empty</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
+    <h3>Related Items</h3>
+    @if($itemType->itemInfos()->count() > 0)
+        @include('admin.item-infos.table',['itemInfos'=>$itemType->itemInfosPaginate()])
+    @else
+        <p>empty</p>
+    @endif
 @endsection

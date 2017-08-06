@@ -25,10 +25,39 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{url('/admin/items')}}">Items</a></li>
-                            <li><a href="{{url('/admin/item-infos')}}">Items Info</a></li>
+                            <li><a href="{{url('/admin/items')}}">List</a></li>
                             <li><a href="{{url('/admin/item-states')}}">Item States</a></li>
-                            <li><a href="{{url('/admin/item-types')}}">Item Types</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Item States</li>
+                            @foreach($navbarItemStates as $itemState)
+                                <li>
+                                    <a href="{{route('admin.item-states.show',$itemState)}}" class="text-capitalize">
+                                        {{$itemState->name}}
+                                        <span class="badge">{{$itemState->items()->count()}}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Item Infos <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{url('/admin/item-infos')}}">List</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Item Types</li>
+                            @foreach($navbarItemTypes as $itemType)
+                                <li>
+                                    <a href="{{route('admin.item-types.show',$itemType)}}" class="text-capitalize">
+                                        {{$itemType->name}}
+                                        <span class="badge">{{$itemType->itemInfos()->count()}}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{url('/admin/item-types')}}">List</a></li>
                         </ul>
                     </li>
                 </ul>

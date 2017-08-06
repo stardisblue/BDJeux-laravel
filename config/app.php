@@ -179,6 +179,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Navigation Bar
+        \App\Providers\NavigationBarProvider::class,
+
     ],
 
     /*

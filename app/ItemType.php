@@ -20,4 +20,9 @@ class ItemType extends Model
         return $this->hasMany('App\ItemInfo');
 
     }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 }
