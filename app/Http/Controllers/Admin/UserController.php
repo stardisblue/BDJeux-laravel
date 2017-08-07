@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User as Request;
 use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index', User::paginate(20));
+        return view('admin.users.index', ['users' => User::paginate(20)]);
     }
 
     /**
@@ -31,11 +31,19 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\User $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'id_card' => 'nullable|int|unique:id_card',
+            'firstname' => 'required|string|max:64',
+            'lastname' => 'required|string|max:64',
+            'username' => 'required|string|max:64|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
         $user = new User($request->all());
 
         $user->save();
@@ -70,17 +78,30 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\User $request
+     * @param  Request $request
      * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
+        $this->validate($request, [
+            'id_card' => 'nullable|int|unique:id_card',
+            'firstname' => 'required|string|max:64',
+            'lastname' => 'required|string|max:64',
+            'username' => 'required|string|max:64|unique:users,username,'.$user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password' => 'nullable|string|min:6|confirmed',
+        ]);
+
         $user->card_id = $request->card_id;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->username = $request->username;
         $user->email = $request->email;
+        if (isset($request->password)) {
+            $user->password = $request->password;
+        }
+
         $user->update();
 
         $request->session()->flash('success', $user->username.' updated !');

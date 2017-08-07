@@ -15,8 +15,13 @@
 
     @include('item-infos.single')
 
+    <h3>Related Items</h3>
+    <div class="text-right">
+        <a href="{{route('admin.items.create',['item_info'=> $itemInfo->id])}}">Create new</a>
+    </div>
     @if($itemInfo->items()->count() > 0)
-        <h2>Related Items</h2>
         @include('admin.items.table',['items' => $itemInfo->itemsPaginate()])
+    @else
+        <p>empty</p>
     @endif
 @endsection

@@ -21,6 +21,27 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Library <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('admin.statuses.index')}}">Status List</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Statuses</li>
+                            @foreach($navbarStatuses as $status)
+                                <li>
+                                    <a href="{{route('admin.statuses.show',$status)}}" class="text-capitalize">
+                                        {{$status->name}} <span class="badge">{{-- TODO $status->items()->count()
+                                        --}}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Items <span class="caret"></span>
                         </a>
 
@@ -59,6 +80,7 @@
                             @endforeach
                         </ul>
                     </li>
+                    <li><a href="{{route('admin.users.index')}}">Users</a></li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

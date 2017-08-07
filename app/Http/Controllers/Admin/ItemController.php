@@ -24,12 +24,26 @@ class ItemController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(\Illuminate\Http\Request $request)
     {
-        return view('admin.items.create',
-            ['itemInfos' => ItemInfo::all(), 'users' => User::all(), 'itemStates' => ItemState::all()]);
+        $data = ['itemStates' => ItemState::all()];
+        if (isset($request->item_info)) {
+            $data['itemInfo'] = ItemInfo::findOrFail($request->item_info);
+        } else {
+            $data['itemInfos'] = ItemInfo::all();
+        }
+
+        if (isset($request->user)) {
+            $data['user'] = User::findOrFail($request->user);
+        } else {
+            $data['users'] = User::all();
+        }
+
+
+        return view('admin.items.create', $data);
     }
 
     /**

@@ -40,12 +40,12 @@ class User extends Authenticatable
 
     public function ownPaginate($perPage = 20)
     {
-        return $this->items()->paginate($this->perPage);
+        return $this->own()->paginate($this->perPage);
     }
 
     public function own()
     {
-        return $this->hasMany('App\Items');
+        return $this->hasMany('App\Item');
     }
 
     public function borrowing()

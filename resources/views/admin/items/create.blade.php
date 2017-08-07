@@ -7,21 +7,35 @@
         {{ csrf_field() }}
 
         @component('snippet.form-group',['label'=> 'Item Info', 'name' => 'item_info_id'])
-            <select class="form-control" name="item_info_id" id="item_info_id" required>
-                @foreach($itemInfos as $itemInfo)
-                    <option value="{{$itemInfo->id}}" {{old('item_info_id') == $itemInfo->id ?
-                        'selected':''}}>{{$itemInfo->title}}</option>
-                @endforeach
-            </select>
+            @isset($itemInfo)
+                <input name="item_info_id" id="item_info_id" class="form-control" value="{{$itemInfo->id}}"
+                       required type="hidden">
+                <p class="form-control-static">{{$itemInfo->title}}</p>
+            @endisset
+            @isset($itemInfos)
+                <select class="form-control" name="item_info_id" id="item_info_id" required>
+                    @foreach($itemInfos as $itemInfo)
+                        <option value="{{$itemInfo->id}}" {{old('item_info_id') == $itemInfo->id ?
+                            'selected':''}}>{{$itemInfo->title}}</option>
+                    @endforeach
+                </select>
+            @endisset
         @endcomponent
 
         @component('snippet.form-group',['label'=> 'Owner', 'name' => 'user_id'])
-            <select class="form-control" name="user_id" id="user_id" required>
-                @foreach($users as $user)
-                    <option value="{{$user->id}}" {{old('user_id') == $user->id ?
+            @isset($user)
+                <input name="user_id" id="user_id" class="form-control" value="{{$user->id}}"
+                       required type="hidden">
+                <p class="form-control-static">{{$user->username}}</p>
+            @endisset
+            @isset($users)
+                <select class="form-control" name="user_id" id="user_id" required>
+                    @foreach($users as $user)
+                        <option value="{{$user->id}}" {{old('user_id') == $user->id ?
                         'selected':''}}>{{$user->username}}</option>
-                @endforeach
-            </select>
+                    @endforeach
+                </select>
+            @endisset
         @endcomponent
 
         @component('snippet.form-group',['label'=> 'State', 'name' => 'item_state_id'])

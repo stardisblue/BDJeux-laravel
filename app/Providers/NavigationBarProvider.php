@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\ItemState;
 use App\ItemType;
+use App\Status;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +20,7 @@ class NavigationBarProvider extends ServiceProvider
         View::composer(['layouts.admin._navbar', 'layouts._navbar'], function ($view) {
             $view->with('navbarItemTypes', ItemType::all());
             $view->with('navbarItemStates', ItemState::all());
+            $view->with('navbarStatuses', Status::all());
         });
     }
 

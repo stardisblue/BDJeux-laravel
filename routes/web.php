@@ -60,6 +60,19 @@ Route::get('/item-types/{item_type}', function (\App\ItemType $itemType) {
     return view('item-types.show', ['itemType' => $itemType]);
 })->name('item-types.show');
 
+/* no use of listing this stuff either
+ |Route::get('/statuses', function () {
+ |    return view('statuses.index', ['statuses' => \App\Statu::paginate(20)]);
+ |})->name('statuses.index');
+ */
+Route::get('/statuses/{status}', function (\App\Status $status) {
+    return view('statuses.show', ['status' => $status]);
+})->name('statuses.show');
+
+/*
+ | Admin
+ */
+
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/', function () {
         return view('layouts.admin.app');
@@ -70,4 +83,5 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin', 'prefix' => 'admi
     Route::resource('/item-states', ItemStateController::class, ['as' => 'admin']);
     Route::resource('/item-types', ItemTypeController::class, ['as' => 'admin']);
     Route::resource('/users', UserController::class, ['as' => 'admin']);
+    Route::resource('/statuses', StatusController::class, ['as' => 'admin']);
 });

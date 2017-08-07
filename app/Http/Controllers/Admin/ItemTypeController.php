@@ -37,7 +37,7 @@ class ItemTypeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:item_states|max:20',
+            'name' => 'required|unique:item_types|max:20',
         ]);
 
         $itemType = new ItemType();
@@ -59,8 +59,7 @@ class ItemTypeController extends Controller
      */
     public function show(ItemType $itemType)
     {
-        return view('admin.item-types.show',
-            ['itemType' => $itemType]);
+        return view('admin.item-types.show', ['itemType' => $itemType]);
     }
 
     /**
@@ -84,7 +83,7 @@ class ItemTypeController extends Controller
     public function update(Request $request, ItemType $itemType)
     {
         $this->validate($request, [
-            'name' => 'required|unique:item_states|max:20',
+            'name' => 'required|unique:item_types|max:20',
         ]);
 
         $itemType->name = $request->name;

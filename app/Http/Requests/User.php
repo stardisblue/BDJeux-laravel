@@ -14,7 +14,7 @@ class User extends FormRequest
     public function authorize()
     {
         // the authorisation is checked with isAdmin middleware
-        return false;
+        return true;
     }
 
     /**
@@ -28,7 +28,7 @@ class User extends FormRequest
             'id_card' => 'nullable|int|unique:id_card',
             'firstname' => 'required|string|max:64',
             'lastname' => 'required|string|max:64',
-            'username' => 'required|string|max:64|unique:users',
+            'username' => 'required|string|max:64|unique:users,'.$this->user->username,
             'email' => 'required|string|email|max:255|unique:users',
         ];
     }

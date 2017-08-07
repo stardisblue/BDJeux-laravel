@@ -1,18 +1,32 @@
 @extends('layouts.admin.panel')
 
 @section('heading')
-    <h2 class="panel-title">Item</h2>
+    <h2 class="panel-title">User</h2>
 @endsection
 @section('body')
     @include('snippet.action-buttons',[
-        'edit'=> route('admin.items.edit', $item),
-        'remove'=> route('admin.items.destroy', $item),
-        'id'=>$item->id
+        'edit'=> route('admin.users.edit', $user),
+        'remove'=> route('admin.users.destroy', $user),
+        'id'=>$user->id
     ])
 
-    {{ $item->itemInfo->title }}
-    {{ $item->itemInfo->description }}
-    {{ $item->itemState->name }}
-    {{ $item->user->username }}
-    {{ $item->borrowable }}
+    <ul>
+        <li>{{$user->id}}</li>
+        <li>{{$user->card_id}}</li>
+        <li>{{$user->firstname}}</li>
+        <li>{{$user->lastname}}</li>
+        <li>{{$user->username}}</li>
+        <li>{{$user->email}}</li>
+        <li>{{$user->role}}</li>
+    </ul>
+
+    <h3>Owns</h3>
+    <div class="text-right">
+        <a href="{{route('admin.items.create',['user'=> $user->id])}}">Create new</a>
+    </div>
+    @if($user->own()->count() > 0)
+        @include('admin.items.table',['items' => $user->ownPaginate()])
+    @else
+        <p>empty</p>
+    @endif
 @endsection
