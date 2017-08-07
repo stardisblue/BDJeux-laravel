@@ -4,16 +4,17 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Item extends FormRequest
+class Loan extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return true
+     * @return bool
      */
     public function authorize()
     {
         // the authorisation is checked with isAdmin middleware
+
         return true;
     }
 
@@ -25,11 +26,12 @@ class Item extends FormRequest
     public function rules()
     {
         return [
-            'item_info_id' => 'required|integer|exists:item_infos,id',
-            'item_state_id' => 'required|integer|exists:item_states,id',
+            'item_id' => 'required|integer|exists:items,id',
+            'status_id' => 'required|integer|exists:statuses,id',
             'user_id' => 'required|integer|exists:users,id',
-            'price' => 'nullable|numeric|min:0',
-            'borrowable' => 'boolean',
+            'date_begin' => 'required|date_format:"d/m/Y"',
+            'date_end' => 'required|date_format:"d/m/Y"|after_or_equal:date_begin',
+            'date_back' => 'nullable|date_format:"d/m/Y"|after_or_equal:date_begin',
         ];
     }
 }

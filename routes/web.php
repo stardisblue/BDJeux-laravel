@@ -84,4 +84,5 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin', 'prefix' => 'admi
     Route::resource('/item-types', ItemTypeController::class, ['as' => 'admin']);
     Route::resource('/users', UserController::class, ['as' => 'admin']);
     Route::resource('/statuses', StatusController::class, ['as' => 'admin']);
+    Route::resource('/loans', LoanController::class, ['as' => 'admin']);
 });

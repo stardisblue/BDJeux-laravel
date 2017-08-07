@@ -7,6 +7,7 @@
             <th>Author</th>
             <th>Owner</th>
             <th>borrowable</th>
+            <th>price</th>
             <th></th>
         </tr>
         </thead>
@@ -16,6 +17,7 @@
                 <td>{{$item->itemInfo->title}}</td>
                 <td>{{$item->itemInfo->author}}</td>
                 <td>{{$item->user->username}}</td>
+                <td>{{$item->price}}</td>
                 <td>{{$item->borrowable ? 'yes': 'no'}}</td>
                 <td>
                     @include('snippet.action-buttons',[

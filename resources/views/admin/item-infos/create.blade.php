@@ -9,7 +9,7 @@
         @component('snippet.form-group',['label'=> 'Type', 'name' => 'item_type_id'])
             <select class="form-control" name="item_type_id" id="item_type_id" required>
                 @foreach($itemTypes as $itemType)
-                    <option {{old('item_type_id') == $itemInfo->item_type_id ? 'selected':''}}
+                    <option {{old('item_type_id') == $itemType->item_type_id ? 'selected':''}}
                             value="{{$itemType->id}}">{{$itemType->name}}</option>
                 @endforeach
             </select>
@@ -33,11 +33,6 @@
         @component('snippet.form-group',['label'=> 'Author', 'name' => 'author'])
             <input name="author" id="author" class="form-control"
                    value="{{ old('author') }}" required>
-        @endcomponent
-
-        @component('snippet.form-group',['label'=> 'Price', 'name' => 'price'])
-            <input type="number" min="0.00" step="0.01" name="price" id="price" class="form-control"
-                   value="{{ old('price') }}">
         @endcomponent
 
         <div class="form-group">

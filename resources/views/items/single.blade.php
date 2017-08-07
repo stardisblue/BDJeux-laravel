@@ -2,4 +2,5 @@
 
 {{ $item->itemState->name }}
 {{ $item->user->username }}
+{{ $item->price }}
 {{ $item->borrowable ? 'yes' : 'no' }}

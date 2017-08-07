@@ -80,6 +80,22 @@
                             @endforeach
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Loans <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('admin.loans.index')}}">Loans List</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Loans state</li>
+                            <li><a href="#">Borrowable</a></li>
+                            <li><a href="#">Borrowed</a></li>
+                            <li><a href="#">Late</a></li>
+                            <li><a href="#">Way too late, admin fix this</a></li>
+                            <li><a href="#">Resolved</a></li>
+                        </ul>
+                    </li>
                     <li><a href="{{route('admin.users.index')}}">Users</a></li>
                 </ul>
                 <!-- Right Side Of Navbar -->

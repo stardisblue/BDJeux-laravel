@@ -55,7 +55,9 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $item = new Item($request->all());
-
+        if (isset($request->price)) {
+            $item->price_cents = $request->price * 100;
+        }
         $item->save();
 
         $request->session()->flash('success',
@@ -100,6 +102,9 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
+        if (isset($request->price)) {
+            $item->price_cents = $request->price * 100;
+        }
         $item->update($request->all());
 
         $request->session()->flash('success',

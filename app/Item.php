@@ -10,9 +10,10 @@ class Item extends Model
         'item_info_id',
         'item_state_id',
         'user_id',
+        'price_cents',
         'borrowable',
     ];
-
+    protected $appends = ['price'];
 
     public function itemInfo()
     {
@@ -27,5 +28,11 @@ class Item extends Model
     public function itemState()
     {
         return $this->belongsTo('App\ItemState');
+    }
+
+
+    public function getPriceAttribute()
+    {
+        return $this->price_cents / 100;
     }
 }

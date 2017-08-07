@@ -14,7 +14,6 @@ class ItemInfo extends Model
         'title',
         'description',
         'isbn',
-        'price',
         'author',
         'nsfw',
     ];

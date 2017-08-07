@@ -7,7 +7,6 @@
             <th>Title</th>
             <th>description</th>
             <th>author</th>
-            <th>price</th>
             <th>NSFW</th>
             <th>n° items</th>
             <th></th>
@@ -20,7 +19,6 @@
                 <td>{{$itemInfo->title}}</td>
                 <td>{{$itemInfo->description}}</td>
                 <td>{{$itemInfo->author}}</td>
-                <td>{{$itemInfo->price ? $itemInfo->price : '-'}}</td>
                 <td>{{$itemInfo->nsfw ? "yes" : 'no'}}</td>
                 <td>{{$itemInfo->items()->count()}}</td>
                 <td>

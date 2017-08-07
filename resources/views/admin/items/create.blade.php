@@ -47,6 +47,12 @@
             </select>
         @endcomponent
 
+        @component('snippet.form-group',['label'=> 'Price', 'name' => 'price'])
+            <input type="number" min="0.00" step="0.01" name="price" id="price" class="form-control"
+                   value="{{ old('price') }}">
+        @endcomponent
+
+
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4 ">
                 <div class="checkbox">

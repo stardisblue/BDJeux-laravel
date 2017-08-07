@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'bad'],
         ]);
 
-        DB::table('status')->insert([
+        DB::table('statuses')->insert([
             ['name' => 'borrowed'],
             ['name' => 'damaged'],
             ['name' => 'lost'],

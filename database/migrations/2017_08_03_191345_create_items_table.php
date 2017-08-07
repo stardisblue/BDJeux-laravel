@@ -25,7 +25,6 @@ class CreateItemsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->char('isbn', 13)->nullable();
-            $table->integer('price')->nullable();
             $table->string('author');
             $table->timestamps();
 
@@ -43,6 +42,7 @@ class CreateItemsTable extends Migration
             $table->integer('item_info_id');
             $table->integer('item_state_id');
             $table->integer('user_id');
+            $table->integer('price_cents')->nullable();
             $table->boolean('borrowable')->default('FALSE');
             $table->timestamps();
 
