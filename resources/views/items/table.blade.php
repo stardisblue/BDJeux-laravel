@@ -6,8 +6,8 @@
             <th>Title</th>
             <th>Author</th>
             <th>Owner</th>
-            <th>borrowable</th>
             <th>price</th>
+            <th>borrowable</th>
             <th></th>
         </tr>
         </thead>

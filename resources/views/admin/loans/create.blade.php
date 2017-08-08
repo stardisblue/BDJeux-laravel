@@ -10,7 +10,7 @@
             @isset($item)
                 <input name="item_id" id="item_id" class="form-control" value="{{$item->id}}"
                        required type="hidden">
-                <p class="form-control-static">{{$item->title}}</p>
+                <p class="form-control-static">{{$item->itemInfo->title .' ('.$item->user->username.')'}}</p>
             @endisset
             @isset($items)
                 <select class="form-control" name="item_id" id="item_id" required>
@@ -39,12 +39,9 @@
         @endcomponent
 
         @component('snippet.form-group',['label'=> 'State', 'name' => 'status_id'])
-            <select class="form-control" name="status_id" id="status_id" required>
-                @foreach($statuses as $status)
-                    <option value="{{$status->id}}" {{old('status_id') == $status->id ?
-                        'selected':''}}>{{$status->name}}</option>
-                @endforeach
-            </select>
+            <input name="status_id" id="status_id" class="form-control" value="{{$status->id}}"
+                   required type="hidden">
+            <p class="form-control-static">{{$status->name}}</p>
         @endcomponent
 
         @component('snippet.form-group',['label'=> 'Date Begin', 'name' => 'date_begin'])

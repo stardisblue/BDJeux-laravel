@@ -29,4 +29,8 @@
     @else
         <p>empty</p>
     @endif
+    <h3>Loans</h3>
+    <div class="text-right">
+        <a href="{{route('admin.loans.create',['user'=> $user->id])}}">Create new</a>
+    </div>
 @endsection

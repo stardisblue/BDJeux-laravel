@@ -56,8 +56,9 @@ class ItemController extends Controller
     {
         $item = new Item($request->all());
         if (isset($request->price)) {
-            $item->price_cents = $request->price * 100;
+            $item->price = $request->price;
         }
+        $item->borrowable = $request->borrowable ? true : false;
         $item->save();
 
         $request->session()->flash('success',
@@ -103,8 +104,9 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         if (isset($request->price)) {
-            $item->price_cents = $request->price * 100;
+            $item->price = $request->price;
         }
+        $item->borrowable = $request->borrowable ? true : false;
         $item->update($request->all());
 
         $request->session()->flash('success',

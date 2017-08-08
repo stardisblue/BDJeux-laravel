@@ -11,4 +11,11 @@
     ])
 
     @include('items.single')
+
+    @if($item->borrowable)
+        <h3>Loans</h3>
+        <div class="text-right">
+            <a href="{{route('admin.loans.create',['item'=> $item->id])}}">Create new</a>
+        </div>
+    @endif
 @endsection

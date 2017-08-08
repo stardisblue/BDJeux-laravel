@@ -32,10 +32,11 @@ class LoanController extends Controller
     public function create(Request $request)
     {
         $data = ['statuses' => Status::all()];
-        if (isset($request->item_info)) {
-            $data['item'] = Item::findOrFail($request->item_info);
+        if (isset($request->item)) {
+            $data['item'] = Item::where(['id' => $request->item, 'borrowable' => true])->firstOrFail();
         } else {
-            $data['items'] = Item::all();
+            $data['items'] = Item::leftJoin('items_types', 'items.id', '=', 'items_types.id')
+                ->where('borrowable', true)->whereNotBetween('')->get();
         }
 
         if (isset($request->user)) {
@@ -46,6 +47,7 @@ class LoanController extends Controller
 
         $data['date_begin'] = Carbon::today()->format('d/m/Y');
         $data['date_end'] = Carbon::today()->addWeek(2)->format('d/m/Y');
+        $data['status'] = Status::findOrFail(1);
 
         return view('admin.loans.create', $data);
     }

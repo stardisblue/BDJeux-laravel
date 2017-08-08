@@ -39,6 +39,7 @@ class ItemInfoController extends Controller
     public function store(Request $request)
     {
         $itemInfo = new ItemInfo($request->all());
+        $itemInfo->nsfw = $request->nsfw ? true : false;
         $itemInfo->save();
 
         $request->session()->flash('success', '"'.$itemInfo->title.'" created !');

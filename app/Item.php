@@ -35,4 +35,10 @@ class Item extends Model
     {
         return $this->price_cents / 100;
     }
+
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price_cents'] = $value*100;
+        $this->appends['price'] = $value;
+    }
 }

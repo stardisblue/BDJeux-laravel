@@ -5,8 +5,8 @@
             <th>ID</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Price</th>
             <th>Owner</th>
+            <th>Price</th>
             <th>borrowable</th>
             <th></th>
         </tr>
@@ -16,8 +16,8 @@
                 <td>{{$item->id}}</td>
                 <td>{{$item->itemInfo->title}}</td>
                 <td>{{$item->itemInfo->author}}</td>
-                <td>{{$item->price ? $item->price : '-'}}</td>
                 <td>{{$item->user->username}}</td>
+                <td>{{$item->price ? $item->price : '-'}}</td>
                 <td>{{$item->borrowable ? 'yes': 'no'}}</td>
                 <td>
                     @include('snippet.action-buttons',[
